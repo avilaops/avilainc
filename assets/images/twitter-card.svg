@@ -1,0 +1,13 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#ffffff"/>
+  
+  <!-- Logo A centralizado -->
+  <g transform="translate(186, 100)">
+    <path d="M70 0L130 280H105L90 230H50L35 280H10L70 0Z" fill="#1a1a1a"/>
+    <rect x="60" y="190" width="20" height="40" fill="#1a1a1a"/>
+    <circle cx="70" cy="35" r="6" fill="#1a1a1a"/>
+  </g>
+  
+  <!-- Texto -->
+  <text x="256" y="450" font-family="system-ui" font-size="40" font-weight="600" fill="#1a1a1a" text-anchor="middle">ÁVILA</text>
+</svg>

@@ -1,0 +1,23 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo branco elegante -->
+  <rect width="1200" height="630" fill="#ffffff"/>
+  
+  <!-- Linha sutil de divisão -->
+  <line x1="0" y1="1" x2="1200" y2="1" stroke="#e5e5e5" stroke-width="1"/>
+  
+  <!-- Logo A grande e minimalista -->
+  <g transform="translate(200, 180)">
+    <path d="M80 0L140 200H115L100 155H60L45 200H20L80 0Z" fill="#1a1a1a"/>
+    <rect x="70" y="130" width="20" height="30" fill="#1a1a1a"/>
+    <circle cx="80" cy="30" r="5" fill="#1a1a1a"/>
+  </g>
+  
+  <!-- Texto ÁVILA INC -->
+  <text x="350" y="320" font-family="system-ui, -apple-system" font-size="80" font-weight="600" fill="#1a1a1a" letter-spacing="-2">ÁVILA INC</text>
+  
+  <!-- Subtítulo -->
+  <text x="350" y="380" font-family="system-ui, -apple-system" font-size="32" font-weight="400" fill="#666666">Framework Empresarial Auto-Sustentável</text>
+  
+  <!-- Linha inferior -->
+  <line x1="0" y1="629" x2="1200" y2="629" stroke="#e5e5e5" stroke-width="1"/>
+</svg>
