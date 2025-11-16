@@ -2,7 +2,7 @@
  * Barbara API - Gravatar Integration Routes v0.1.0
  * Endpoints REST para integração com Gravatar
  * Base URL: https://api.avila.inc
- * 
+ *
  * @version 0.1.0
  * @date 2025-11-16
  */

@@ -1,7 +1,7 @@
 /**
- * Ávila Inc - Gravatar API Server v0.1.0
- * Servidor Express para integração com Gravatar
- * 
+ * Ávila Inc - API Server v0.1.0
+ * Servidor Express para Gravatar e Email
+ *
  * @version 0.1.0
  * @date 2025-11-16
  */
@@ -12,6 +12,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const gravatarRoutes = require('./routes/gravatar-routes');
+const emailRoutes = require('./routes/email-routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -81,25 +82,42 @@ app.get('/health', (req, res) => {
 // API Info
 app.get('/api/v0', (req, res) => {
     res.json({
-        name: 'Ávila Gravatar API',
+        name: 'Ávila API Platform',
         version: API_VERSION,
-        description: 'API de integração com Gravatar para avatares de usuários',
-        documentation: 'https://docs.avila.inc/gravatar',
-        endpoints: {
-            avatar: '/api/v0/gravatar/avatar/:email',
-            batch: '/api/v0/gravatar/avatars/batch',
-            product: '/api/v0/gravatar/product/:product/:email',
-            profile: '/api/v0/gravatar/profile/:email',
-            check: '/api/v0/gravatar/check/:email',
-            hash: '/api/v0/gravatar/hash/:email'
+        description: 'API de integração com Gravatar e Email para Ávila Inc',
+        documentation: 'https://docs.avila.inc',
+        services: {
+            gravatar: {
+                endpoints: {
+                    avatar: '/api/v0/gravatar/avatar/:email',
+                    batch: '/api/v0/gravatar/avatars/batch',
+                    product: '/api/v0/gravatar/product/:product/:email',
+                    profile: '/api/v0/gravatar/profile/:email',
+                    check: '/api/v0/gravatar/check/:email',
+                    hash: '/api/v0/gravatar/hash/:email'
+                },
+                themes: ['light', 'dark']
+            },
+            email: {
+                endpoints: {
+                    send: '/api/v0/email/send',
+                    template: '/api/v0/email/template',
+                    verify: '/api/v0/email/verify',
+                    test: '/api/v0/email/test',
+                    templates: '/api/v0/email/templates',
+                    accounts: '/api/v0/email/accounts'
+                },
+                accounts: ['nicolas@avila.inc', 'dev@avila.inc'],
+                templates: ['welcome', 'notification', 'alert', 'gravatar']
+            }
         },
-        themes: ['light', 'dark'],
         products: ['secreta', 'dashboard', 'pulse', 'archivus', 'barbara', 'shancrys']
     });
 });
 
-// Rotas Gravatar
+// Rotas
 app.use('/api/v0/gravatar', gravatarRoutes);
+app.use('/api/v0/email', emailRoutes);
 
 // 404 Handler
 app.use((req, res) => {
@@ -126,18 +144,25 @@ app.listen(PORT, () => {
     console.log(`
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║   🚀 Ávila Gravatar API v${API_VERSION}                        ║
+║   🚀 Ávila API Platform v${API_VERSION}                        ║
 ║                                                           ║
 ║   Server running on: http://localhost:${PORT}              ║
 ║   Environment: ${process.env.NODE_ENV || 'development'}                       ║
-║   Themes: light, dark                                     ║
+║                                                           ║
+║   📧 Email Service:                                       ║
+║   - nicolas@avila.inc                                     ║
+║   - dev@avila.inc                                         ║
+║   - SMTP: smtp.porkbun.com                                ║
+║                                                           ║
+║   🎨 Gravatar Service:                                    ║
+║   - Themes: light, dark                                   ║
+║   - 18 produtos integrados                                ║
 ║                                                           ║
 ║   Endpoints:                                              ║
 ║   - GET  /health                                          ║
 ║   - GET  /api/v0                                          ║
-║   - GET  /api/v0/gravatar/avatar/:email                   ║
-║   - POST /api/v0/gravatar/avatars/batch                   ║
-║   - GET  /api/v0/gravatar/product/:product/:email         ║
+║   - GET  /api/v0/gravatar/*                               ║
+║   - POST /api/v0/email/*                                  ║
 ║                                                           ║
 ║   📚 Documentation: GRAVATAR_API_v0.md                    ║
 ║                                                           ║

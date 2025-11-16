@@ -2,7 +2,7 @@
  * Gravatar API Integration v0.1.0
  * Integração com Gravatar para avatares de usuários
  * API Key: gk-ozHmHXVf-TMBrfDAk69r3ejAkSM8CgwdAqNuhXNrpBqmsSix7Tpv08FL8CUs9
- * 
+ *
  * @version 0.1.0
  * @date 2025-11-16
  */

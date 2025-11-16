@@ -5,7 +5,7 @@ API de integração com Gravatar para avatares de usuários no ecossistema Ávil
 
 **Base URL:** `https://api.avila.inc/v0/gravatar`
 
-**Versão:** 0.1.0  
+**Versão:** 0.1.0
 **Data:** 2025-11-16
 
 ---
@@ -216,7 +216,7 @@ async function getAvatar(email, theme = 'light') {
       }
     }
   );
-  
+
   const data = await response.json();
   return data.data;
 }
@@ -242,7 +242,7 @@ async function getAvatarsBatch(emails, theme = 'light') {
       })
     }
   );
-  
+
   const data = await response.json();
   return data.data.avatars;
 }
@@ -263,15 +263,15 @@ import { useState, useEffect } from 'react';
 
 function GravatarAvatar({ email, size = 80, theme = 'light' }) {
   const [avatar, setAvatar] = useState(null);
-  
+
   useEffect(() => {
     fetch(`https://api.avila.inc/v0/gravatar/avatar/${encodeURIComponent(email)}?size=${size}&theme=${theme}`)
       .then(res => res.json())
       .then(data => setAvatar(data.data));
   }, [email, size, theme]);
-  
+
   if (!avatar) return <div>Carregando...</div>;
-  
+
   return (
     <div style={{
       display: 'inline-block',
@@ -280,8 +280,8 @@ function GravatarAvatar({ email, size = 80, theme = 'light' }) {
       padding: '2px',
       backgroundColor: avatar.themeConfig.backgroundColor
     }}>
-      <img 
-        src={avatar.avatarUrl} 
+      <img
+        src={avatar.avatarUrl}
         alt={email}
         style={{
           width: size,
@@ -388,6 +388,6 @@ const avatar = await fetch(
 
 ## Suporte
 
-**Email:** dev@avila.inc  
-**Documentação:** https://docs.avila.inc/gravatar  
+**Email:** dev@avila.inc
+**Documentação:** https://docs.avila.inc/gravatar
 **Status:** https://status.avila.inc
