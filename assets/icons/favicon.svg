@@ -1,11 +1,75 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Fundo -->
-  <rect width="512" height="512" fill="#1a1a1a"/>
-  
-  <!-- Letra A estilizada minimalista -->
-  <path d="M256 120L340 380H300L280 330H232L212 380H172L256 120Z" fill="white"/>
-  <rect x="240" y="280" width="32" height="50" fill="white"/>
-  
-  <!-- Ponto de destaque (representa IA/tecnologia) -->
-  <circle cx="256" cy="170" r="8" fill="#ffffff"/>
+    <defs>
+        <!-- Gradientes metálicos -->
+        <linearGradient id="metalBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#2E5CFF;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#6B9EFF;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#C8DCFF;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="metalSilver" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#7A8A9E;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#B8C5D6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#E8EEF5;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="green" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#00FF88;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#00CC66;stop-opacity:1" />
+        </linearGradient>
+        <!-- Sombras e brilhos -->
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+            <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+        <filter id="shadow">
+            <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.4" />
+        </filter>
+    </defs>
+
+    <!-- Fundo preto -->
+    <rect width="512" height="512" fill="#000000" />
+
+    <!-- Cloud (Nuvem) - Representa Cloud Computing -->
+    <g filter="url(#shadow)">
+        <path
+            d="M380 200C380 200 420 200 440 220C460 240 460 280 440 300C420 320 380 320 380 320H160C160 320 120 320 100 300C80 280 80 240 100 220C120 200 160 200 160 200C160 180 180 140 220 120C260 100 300 120 320 140C340 160 360 180 380 200Z"
+            fill="url(#metalBlue)" stroke="url(#metalSilver)" stroke-width="3" />
+        <!-- Detalhes metálicos na nuvem -->
+        <path d="M380 200C380 190 370 180 360 175C350 170 340 170 330 175" stroke="#ffffff"
+            stroke-width="2" opacity="0.6" fill="none" />
+    </g>
+
+    <!-- Gear (Engrenagem) - Representa Automação -->
+    <g transform="translate(340, 280)" filter="url(#shadow)">
+        <circle cx="0" cy="0" r="50" fill="url(#metalSilver)" />
+        <!-- Dentes da engrenagem -->
+        <path
+            d="M 0,-50 L 8,-60 L -8,-60 Z M 50,0 L 60,8 L 60,-8 Z M 0,50 L 8,60 L -8,60 Z M -50,0 L -60,8 L -60,-8 Z
+             M 35,-35 L 45,-45 L 35,-45 L 35,-35 Z M 35,35 L 45,45 L 35,45 L 35,35 Z M -35,35 L -45,45 L -35,45 L -35,35 Z M -35,-35 L -45,-45 L -35,-45 L -35,-35 Z"
+            fill="url(#metalSilver)" />
+        <!-- Centro da engrenagem com analytics -->
+        <circle cx="0" cy="0" r="25" fill="#000000" stroke="url(#metalSilver)" stroke-width="2" />
+        <!-- Barras de analytics -->
+        <rect x="-12" y="-5" width="6" height="10" fill="url(#green)" rx="1" filter="url(#glow)" />
+        <rect x="-3" y="-10" width="6" height="15" fill="url(#green)" rx="1" filter="url(#glow)" />
+        <rect x="6" y="-8" width="6" height="13" fill="url(#green)" rx="1" filter="url(#glow)" />
+    </g>
+
+    <!-- Code Brackets - Representa Desenvolvimento -->
+    <g transform="translate(150, 260)" filter="url(#shadow)">
+        <path d="M -20,-30 L -40,-10 L -40,10 L -20,30" stroke="url(#metalSilver)" stroke-width="8"
+            stroke-linecap="round" fill="none" />
+        <path d="M 20,-30 L 40,-10 L 40,10 L 20,30" stroke="url(#metalSilver)" stroke-width="8"
+            stroke-linecap="round" fill="none" />
+    </g>
+
+    <!-- Play/Deploy Arrow -->
+    <g transform="translate(260, 260)">
+        <path d="M 0,-25 L 30,0 L 0,25 Z" fill="url(#metalBlue)" filter="url(#glow)" />
+    </g>
+
+    <!-- Reflexos e brilhos finais -->
+    <ellipse cx="256" cy="150" rx="80" ry="20" fill="#ffffff" opacity="0.1" />
 </svg>

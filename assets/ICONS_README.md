@@ -127,6 +127,6 @@ Se precisar atualizar os ícones:
 
 ---
 
-**Criado por:** GitHub Copilot + Claude Sonnet 4.5  
-**Data:** 16 de Novembro de 2025  
+**Criado por:** GitHub Copilot + Claude Sonnet 4.5
+**Data:** 16 de Novembro de 2025
 **Versão:** 1.0.0

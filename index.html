@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Framework empresarial auto-sustentável com 18 produtos SaaS e sistema de IA que aprende e evolui sozinho. Soluções empresariais de alta tecnologia.">
     <meta name="keywords" content="IA, SaaS, Framework Empresarial, Azure, Machine Learning, Automação, Gestão Empresarial, BIM, API, Dashboard">
     <meta name="author" content="Ávila Inc">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://salmon-island-0f049391e.3.azurestaticapps.net">
-    
+
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/icons/favicon-16x16.svg">
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/icons/favicon-32x32.svg">
     <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.svg">
-    
+
+    <!-- Iconoir Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://salmon-island-0f049391e.3.azurestaticapps.net">
@@ -27,7 +30,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Ávila Inc">
     <meta property="og:locale" content="pt_BR">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://salmon-island-0f049391e.3.azurestaticapps.net">
@@ -36,17 +39,17 @@
     <meta name="twitter:image" content="https://salmon-island-0f049391e.3.azurestaticapps.net/assets/images/twitter-card.svg">
     <meta name="twitter:creator" content="@avilaops">
     <meta name="twitter:site" content="@avilaops">
-    
+
     <!-- Additional Meta Tags -->
     <meta name="theme-color" content="#1a1a1a">
     <meta name="msapplication-TileColor" content="#1a1a1a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Ávila Inc">
-    
+
     <!-- PWA Manifest -->
     <link rel="manifest" href="site.webmanifest">
-    
+
     <title>Ávila Inc - O Futuro da Gestão Empresarial</title>
 
     <style>
@@ -428,9 +431,41 @@
         }
 
         .product-icon {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2E5CFF 0%, #6B9EFF 50%, #C8DCFF 100%);
+            box-shadow: 0 4px 16px rgba(46, 92, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        .product-icon i {
+            color: white;
+            font-size: 2.5rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .product-card:hover .product-icon {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 24px rgba(46, 92, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6);
         }
 
         .product-title {
@@ -760,7 +795,7 @@
 
         <div class="products-grid">
             <div class="product-card reveal">
-                <div class="product-icon">🏗️</div>
+                <div class="product-icon"><i class="iconoir-building-3d"></i></div>
                 <h3 class="product-title">Shancrys BIM</h3>
                 <p class="product-description">
                     Gestão completa de construção civil com BIM integration, planejamento 3D e controle de obra em tempo real.
@@ -773,7 +808,7 @@
             </div>
 
             <div class="product-card reveal">
-                <div class="product-icon">🔐</div>
+                <div class="product-icon"><i class="iconoir-shield-check"></i></div>
                 <h3 class="product-title">Secreta</h3>
                 <p class="product-description">
                     Sistema de segurança empresarial avançada com monorepo multi-apps, criptografia AES-256 e controle de acesso.
@@ -786,7 +821,7 @@
             </div>
 
             <div class="product-card reveal">
-                <div class="product-icon">⚡</div>
+                <div class="product-icon"><i class="iconoir-server-connection"></i></div>
                 <h3 class="product-title">Barbara API</h3>
                 <p class="product-description">
                     Backend .NET Core de alta performance com arquitetura escalável, microsserviços e APIs RESTful robustas.
@@ -799,7 +834,7 @@
             </div>
 
             <div class="product-card reveal">
-                <div class="product-icon">📊</div>
+                <div class="product-icon"><i class="iconoir-graph-up"></i></div>
                 <h3 class="product-title">On Dashboard</h3>
                 <p class="product-description">
                     Dashboards operacionais inteligentes com visualizações em tempo real, métricas personalizadas e analytics.
@@ -812,7 +847,7 @@
             </div>
 
             <div class="product-card reveal">
-                <div class="product-icon">🤖</div>
+                <div class="product-icon"><i class="iconoir-brain"></i></div>
                 <h3 class="product-title">Archivus AI</h3>
                 <p class="product-description">
                     Agente bibliotecário com IA que indexa, organiza e busca documentação automaticamente usando RAG e ML local.
@@ -825,7 +860,7 @@
             </div>
 
             <div class="product-card reveal">
-                <div class="product-icon">💓</div>
+                <div class="product-icon"><i class="iconoir-activity"></i></div>
                 <h3 class="product-title">Pulse Monitor</h3>
                 <p class="product-description">
                     Monitoramento em tempo real de todos os sistemas, serviços e métricas com alertas inteligentes e previsões.

@@ -1,23 +1,59 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Fundo branco elegante -->
-  <rect width="1200" height="630" fill="#ffffff"/>
-  
-  <!-- Linha sutil de divisão -->
-  <line x1="0" y1="1" x2="1200" y2="1" stroke="#e5e5e5" stroke-width="1"/>
-  
-  <!-- Logo A grande e minimalista -->
-  <g transform="translate(200, 180)">
-    <path d="M80 0L140 200H115L100 155H60L45 200H20L80 0Z" fill="#1a1a1a"/>
-    <rect x="70" y="130" width="20" height="30" fill="#1a1a1a"/>
-    <circle cx="80" cy="30" r="5" fill="#1a1a1a"/>
-  </g>
-  
-  <!-- Texto ÁVILA INC -->
-  <text x="350" y="320" font-family="system-ui, -apple-system" font-size="80" font-weight="600" fill="#1a1a1a" letter-spacing="-2">ÁVILA INC</text>
-  
-  <!-- Subtítulo -->
-  <text x="350" y="380" font-family="system-ui, -apple-system" font-size="32" font-weight="400" fill="#666666">Framework Empresarial Auto-Sustentável</text>
-  
-  <!-- Linha inferior -->
-  <line x1="0" y1="629" x2="1200" y2="629" stroke="#e5e5e5" stroke-width="1"/>
+    <defs>
+        <linearGradient id="metalBlueOG" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#2E5CFF;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#6B9EFF;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#C8DCFF;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="metalSilverOG" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#7A8A9E;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#B8C5D6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#E8EEF5;stop-opacity:1" />
+        </linearGradient>
+        <filter id="glowOG">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+            <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+        <filter id="shadowOG">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3" />
+        </filter>
+    </defs>
+    
+    <!-- Fundo branco elegante -->
+    <rect width="1200" height="630" fill="#ffffff" />
+
+    <!-- Logo metálico 3D -->
+    <g transform="translate(120, 180)">
+        <!-- Cloud -->
+        <g filter="url(#shadowOG)">
+            <path d="M180 50C180 50 210 50 225 65C240 80 240 110 225 125C210 140 180 140 180 140H60C60 140 30 140 15 125C0 110 0 80 15 65C30 50 60 50 60 50C60 40 70 20 90 10C110 0 130 10 145 25C160 40 165 45 180 50Z" fill="url(#metalBlueOG)" stroke="url(#metalSilverOG)" stroke-width="2" />
+        </g>
+        <!-- Gear -->
+        <g transform="translate(165, 110)" filter="url(#shadowOG)">
+            <circle cx="0" cy="0" r="30" fill="url(#metalSilverOG)" />
+            <circle cx="0" cy="0" r="15" fill="#000000" stroke="url(#metalSilverOG)" stroke-width="1.5" />
+            <rect x="-7" y="-3" width="3" height="6" fill="#00FF88" rx="1" filter="url(#glowOG)" />
+            <rect x="-2" y="-6" width="3" height="9" fill="#00FF88" rx="1" filter="url(#glowOG)" />
+            <rect x="3" y="-5" width="3" height="8" fill="#00FF88" rx="1" filter="url(#glowOG)" />
+        </g>
+        <!-- Code brackets -->
+        <g transform="translate(55, 105)" filter="url(#shadowOG)">
+            <path d="M -10,-15 L -20,-5 L -20,5 L -10,15" stroke="url(#metalSilverOG)" stroke-width="5" stroke-linecap="round" fill="none" />
+            <path d="M 10,-15 L 20,-5 L 20,5 L 10,15" stroke="url(#metalSilverOG)" stroke-width="5" stroke-linecap="round" fill="none" />
+        </g>
+    </g>
+
+    <!-- Texto ÁVILA INC -->
+    <text x="400" y="320" font-family="system-ui, -apple-system" font-size="80" font-weight="600"
+        fill="#1a1a1a" letter-spacing="-2">ÁVILA INC</text>
+
+    <!-- Subtítulo -->
+    <text x="400" y="380" font-family="system-ui, -apple-system" font-size="32" font-weight="400"
+        fill="#666666">Framework Empresarial Auto-Sustentável</text>
+
+    <!-- Linha inferior -->
+    <line x1="0" y1="629" x2="1200" y2="629" stroke="#e5e5e5" stroke-width="1" />
 </svg>
