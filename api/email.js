@@ -1,7 +1,7 @@
 /**
  * Email Configuration - Porkbun SMTP v0.1.0
  * Configuração de email para Ávila Inc
- * 
+ *
  * @version 0.1.0
  * @date 2025-11-16
  */
@@ -76,7 +76,7 @@ function createTransporter() {
  */
 async function sendEmail(options) {
     const transporter = createTransporter();
-    
+
     const mailOptions = {
         from: `"${EMAIL_CONFIG.accounts.nicolas.name}" <${options.from || EMAIL_CONFIG.accounts.nicolas.email}>`,
         to: options.to,
@@ -109,7 +109,7 @@ async function sendEmail(options) {
  */
 async function sendTemplateEmail(templateName, to, data = {}) {
     const template = EMAIL_CONFIG.templates[templateName];
-    
+
     if (!template) {
         throw new Error(`Template '${templateName}' não encontrado`);
     }
@@ -133,7 +133,7 @@ async function sendTemplateEmail(templateName, to, data = {}) {
                             ${data.message || 'Obrigado por se juntar ao ecossistema Ávila Inc. Estamos felizes em tê-lo conosco!'}
                         </p>
                         <div style="margin: 30px 0; text-align: center;">
-                            <a href="${data.ctaUrl || 'https://salmon-island-0f049391e.3.azurestaticapps.net'}" 
+                            <a href="${data.ctaUrl || 'https://salmon-island-0f049391e.3.azurestaticapps.net'}"
                                style="background: #1a1a1a; color: white; padding: 12px 32px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 500;">
                                 ${data.ctaText || 'Acessar Plataforma'}
                             </a>
@@ -224,7 +224,7 @@ async function notifyGravatarUsage(email, product, theme = 'light') {
  */
 async function verifyConnection() {
     const transporter = createTransporter();
-    
+
     try {
         await transporter.verify();
         console.log('✅ Conexão SMTP verificada com sucesso');

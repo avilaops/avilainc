@@ -1,7 +1,7 @@
 /**
  * Email Routes v0.1.0
  * Endpoints para envio de emails via Porkbun SMTP
- * 
+ *
  * @version 0.1.0
  * @date 2025-11-16
  */
@@ -13,7 +13,7 @@ const email = require('../email');
 /**
  * POST /api/v0/email/send
  * Envia email customizado
- * 
+ *
  * @body {string} from - Email remetente (nicolas@avila.inc ou dev@avila.inc)
  * @body {string|string[]} to - Destinatário(s)
  * @body {string} subject - Assunto
@@ -58,7 +58,7 @@ router.post('/send', async (req, res) => {
 /**
  * POST /api/v0/email/template
  * Envia email usando template pré-configurado
- * 
+ *
  * @body {string} template - Nome do template (welcome, notification, alert, gravatar)
  * @body {string|string[]} to - Destinatário(s)
  * @body {object} data - Dados para o template
@@ -93,7 +93,7 @@ router.post('/template', async (req, res) => {
 /**
  * GET /api/v0/email/verify
  * Verifica conexão SMTP
- * 
+ *
  * @returns {object} Status da conexão
  */
 router.get('/verify', async (req, res) => {
@@ -120,7 +120,7 @@ router.get('/verify', async (req, res) => {
 /**
  * POST /api/v0/email/test
  * Envia email de teste
- * 
+ *
  * @returns {object} Resultado do envio
  */
 router.post('/test', async (req, res) => {
@@ -144,7 +144,7 @@ router.post('/test', async (req, res) => {
 /**
  * GET /api/v0/email/templates
  * Lista templates disponíveis
- * 
+ *
  * @returns {object} Templates disponíveis
  */
 router.get('/templates', (req, res) => {
@@ -161,7 +161,7 @@ router.get('/templates', (req, res) => {
 /**
  * GET /api/v0/email/accounts
  * Lista contas de email configuradas
- * 
+ *
  * @returns {object} Contas disponíveis
  */
 router.get('/accounts', (req, res) => {
@@ -175,7 +175,7 @@ router.get('/accounts', (req, res) => {
 /**
  * POST /api/v0/email/notify/gravatar
  * Notifica uso do Gravatar via email
- * 
+ *
  * @body {string} email - Email do usuário
  * @body {string} product - Produto que está usando
  * @body {string} theme - Tema (light/dark)

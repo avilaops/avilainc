@@ -2,8 +2,8 @@
 
 ## Configuração Porkbun SMTP
 
-**SMTP Server:** smtp.porkbun.com  
-**Port:** 587 (TLS)  
+**SMTP Server:** smtp.porkbun.com
+**Port:** 587 (TLS)
 **Versão:** 0.1.0
 
 ### Contas Configuradas
@@ -274,7 +274,7 @@ async function sendEmail(to, subject, message) {
       html: `<p>${message}</p>`
     })
   });
-  
+
   return await response.json();
 }
 
@@ -301,7 +301,7 @@ async function sendWelcomeEmail(userEmail, userName) {
       }
     })
   });
-  
+
   return await response.json();
 }
 
@@ -314,7 +314,7 @@ await sendWelcomeEmail('novousuario@example.com', 'João Silva');
 async function checkEmailService() {
   const response = await fetch('https://api.avila.inc/v0/email/verify');
   const data = await response.json();
-  
+
   if (data.data.connected) {
     console.log('✅ Email service online');
   } else {
@@ -417,6 +417,6 @@ npm run test:email
 
 ## Suporte
 
-**Email:** dev@avila.inc  
-**SMTP:** nicolas@avila.inc  
+**Email:** dev@avila.inc
+**SMTP:** nicolas@avila.inc
 **Documentation:** https://docs.avila.inc/email
