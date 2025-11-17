@@ -1,16 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
   <defs>
     <linearGradient id="appleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#4a4a4a;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#0a0b0d;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a1d26;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0b0d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textMainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8eaed;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#9aa0a6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
     </linearGradient>
     <filter id="appleShadow">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.4"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#667eea" flood-opacity="0.6"/>
     </filter>
+    <filter id="textGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="shineGradient" cx="30%" cy="30%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </radialGradient>
   </defs>
   <rect width="180" height="180" rx="40" fill="url(#appleGradient)" filter="url(#appleShadow)"/>
-  <text x="90" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        font-size="80" font-weight="700" fill="#fff" text-anchor="middle">Á</text>
-  <text x="90" y="145" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        font-size="20" font-weight="400" fill="#ccc" text-anchor="middle">AVILA</text>
+  <rect width="180" height="180" rx="40" fill="none" stroke="url(#borderGradient)" stroke-width="2" opacity="0.6"/>
+  <ellipse cx="60" cy="60" rx="80" ry="80" fill="url(#shineGradient)"/>
+  <text x="90" y="120" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-size="90" font-weight="700" fill="url(#textMainGradient)" text-anchor="middle" filter="url(#textGlow)">Á</text>
+  <text x="90" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-size="22" font-weight="600" fill="url(#borderGradient)" text-anchor="middle" letter-spacing="3">AVILA</text>
 </svg>
