@@ -486,7 +486,21 @@
         /* Stats Section */
         .stats {
             padding: 5rem 2rem;
-            background: var(--bg-secondary);
+            background: linear-gradient(180deg, #12141a 0%, #0a0b0d 100%);
+            position: relative;
+            border-top: 2px solid transparent;
+            border-image: linear-gradient(90deg, transparent, #667eea 20%, #764ba2 50%, #d4af37 80%, transparent) 1;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .stats-container {
@@ -500,22 +514,28 @@
         .stat-card {
             text-align: center;
             padding: 2.5rem 2rem;
-            background: white;
-            border-radius: 8px;
-            border: 1px solid var(--border);
+            background: linear-gradient(135deg, rgba(26, 29, 38, 0.8) 0%, rgba(18, 20, 26, 0.9) 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(200, 201, 208, 0.15);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
         .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-            border-color: var(--primary);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
         }
 
         .stat-number {
             font-size: 3rem;
-            font-weight: 600;
-            color: var(--primary);
+            font-weight: 700;
+            background: linear-gradient(135deg, #e8eaed 0%, #9aa0a6 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
@@ -869,29 +889,58 @@
         /* CTA Section */
         .cta-section {
             padding: 8rem 2rem;
-            background: var(--primary);
+            background: linear-gradient(135deg, #0a0b0d 0%, #1a1d26 50%, #0a0b0d 100%);
             text-align: center;
+            position: relative;
+            border-top: 2px solid transparent;
+            border-image: linear-gradient(90deg, transparent, #667eea 20%, #764ba2 50%, #d4af37 80%, transparent) 1;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .cta-section h2 {
             font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 1.5rem;
-            color: white;
-            font-weight: 600;
+            background: linear-gradient(135deg, #e8eaed 0%, #9aa0a6 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
             letter-spacing: -0.02em;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-section p {
             font-size: 1.15rem;
             margin-bottom: 3rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--text-secondary);
             font-weight: 400;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-section .primary-btn {
-            background: white;
-            color: var(--primary);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
         /* Footer */
