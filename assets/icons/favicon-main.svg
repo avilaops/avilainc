@@ -1,26 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <defs>
     <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="50%" stop-color="#764ba2"/>
+      <stop offset="100%" stop-color="#d4af37"/>
     </linearGradient>
-    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#e8eaed;stop-opacity:1" />
-    </linearGradient>
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#667eea" flood-opacity="0.5"/>
-    </filter>
     <filter id="glow">
-      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
       <feMerge>
-        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
   </defs>
-  <rect width="32" height="32" rx="8" fill="url(#mainGradient)" filter="url(#shadow)"/>
-  <rect width="32" height="32" rx="8" fill="none" stroke="url(#textGradient)" stroke-width="0.5" opacity="0.3"/>
-  <text x="16" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" font-weight="700" fill="url(#textGradient)" text-anchor="middle" filter="url(#glow)">Á</text>
+  <rect width="32" height="32" rx="8" fill="url(#mainGradient)"/>
+  <rect width="32" height="32" rx="8" fill="none" stroke="#fff" stroke-width="0.7" opacity="0.25"/>
+  <text x="16" y="20.5" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle" filter="url(#glow)">Ávila</text>
 </svg>
