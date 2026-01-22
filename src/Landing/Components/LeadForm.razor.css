@@ -162,6 +162,63 @@
     margin: 0;
 }
 
+.whatsapp-fallback {
+    margin-top: 24px;
+    padding: 20px;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+}
+
+.whatsapp-fallback p {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn--whatsapp {
+    background: white !important;
+    color: #25d366 !important;
+    border: 2px solid white !important;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn--whatsapp:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.success-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn--secondary {
+    background: #f5f5f5;
+    color: #666;
+    border: 2px solid #e0e0e0;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn--secondary:hover {
+    background: #e0e0e0;
+    border-color: #ccc;
+}
+
 @media (max-width: 768px) {
     .lead-form-container {
         padding: 16px;

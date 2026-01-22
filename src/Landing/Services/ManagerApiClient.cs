@@ -158,6 +158,33 @@ public sealed class ManagerApiClient
             throw;
         }
     }
+
+    /// <summary>
+    /// Registra evento de analytics
+    /// </summary>
+    public async Task TrackAnalyticsEventAsync(
+        object eventData,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/analytics/events",
+                eventData,
+                cancellationToken);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _logger.LogWarning(
+                    "Falha ao registrar evento de analytics. Status: {StatusCode}",
+                    response.StatusCode);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao registrar evento de analytics");
+        }
+    }
 }
 
 /// <summary>
