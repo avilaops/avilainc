@@ -17,17 +17,19 @@ Acesse: `https://localhost:5001` ou `http://localhost:5000`
 
 O projeto usa Blazor Server (não WebAssembly), com SignalR para comunicação em tempo real.
 
-## 📱 WhatsApp
+## � Formulários de Lead
 
-Para trocar o número de telefone do WhatsApp:
+O site possui formulários integrados que capturam leads e enviam diretamente para a API do Manager. Os formulários incluem:
 
-1. Abra `Components/Shared/Navbar.razor`
-2. Abra `Components/Sections/HeroSection.razor`
-3. Abra `Components/Sections/ServicesSection.razor`
-4. Abra `Components/Sections/FinalCtaSection.razor`
-5. Substitua `5511987654321` pelo novo número (com DDI+DDD sem espaços)
+- **Validação brasileira**: Telefone e email validados
+- **Captura de UTM**: Parâmetros de campanhas são automaticamente capturados
+- **Rastreamento de origem**: Cada formulário identifica de onde veio o lead
+- **Interesse específico**: Serviço de interesse é registrado
 
-Exemplo: Para (21) 99999-8888, use: `552199999888`
+### Locais dos Formulários:
+- Hero Section (modal)
+- Seção de Serviços (modal por serviço)
+- CTA Final (formulário direto)
 
 ## 🎨 Personalização
 

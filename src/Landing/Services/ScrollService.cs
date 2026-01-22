@@ -40,9 +40,4 @@ public class ScrollService
     {
         return await _jsRuntime.InvokeAsync<int>("getScrollY");
     }
-
-    public string BuildWhatsAppUrl(string phone, string message)
-    {
-        return $"https://wa.me/{phone}?text={Uri.EscapeDataString(message)}";
-    }
 }
