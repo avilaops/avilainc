@@ -14,10 +14,7 @@
                     <p class="card__text">@service.Description</p>
                     <div class="card__actions">
                         <button class="btn btn--primary" type="button" @onclick="() => OpenLeadModal(service)">
-                            @service.ButtonText
-                        </button>
-                        <button class="btn btn--outline" type="button" @onclick="() => ContactForService(service.Title)">
-                            WhatsApp
+                            Solicitar @service.Title
                         </button>
                     </div>
                 </div>
@@ -55,13 +52,6 @@
         new() { Icon = "🔗", Title = "Integrações", Description = "Conecte pagamentos, e-mail e ferramentas de IA para tudo funcionar junto automaticamente.", ButtonText = "Quero Integrações" },
         new() { Icon = "👥", Title = "CRM Completo", Description = "Gerencie leads, contatos e campanhas em um só lugar. Simples, poderoso e fácil de usar.", ButtonText = "Quero CRM" }
     };
-
-    private async Task ContactForService(string serviceName)
-    {
-        var message = $"Olá! Tenho interesse em {serviceName}. Podemos conversar?";
-        var url = ScrollService.BuildWhatsAppUrl("5511987654321", message);
-        await ScrollService.OpenNewTabAsync(url);
-    }
 
     private void OpenLeadModal(ServiceCard service)
     {
