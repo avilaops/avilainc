@@ -2,22 +2,31 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Driver;
 using Manager.Core.Entities;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.AspNetCore.Cors;
 
 namespace Manager.Api.Controllers;
 
 [ApiController]
 [Route("api/public/leads")]
+[EnableCors("LandingCors")]
 public class PublicLeadsController : ControllerBase
 {
     private readonly IMongoCollection<Lead> _leadsCollection;
+    private readonly IMongoCollection<AnalyticsEvent> _eventsCollection;
     private readonly ILogger<PublicLeadsController> _logger;
+    private readonly IMemoryCache _cache;
 
     public PublicLeadsController(
         IMongoCollection<Lead> leadsCollection,
-        ILogger<PublicLeadsController> logger)
+        IMongoCollection<AnalyticsEvent> eventsCollection,
+        ILogger<PublicLeadsController> logger,
+        IMemoryCache cache)
     {
         _leadsCollection = leadsCollection;
+        _eventsCollection = eventsCollection;
         _logger = logger;
+        _cache = cache;
     }
 
     /// <summary>
@@ -26,6 +35,22 @@ public class PublicLeadsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateLeadRequest request)
     {
+        // Rate limiting: 10 requests por minuto por IP
+        var clientIp = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+        var cacheKey = $"lead_rate_limit_{clientIp}";
+        
+        if (_cache.TryGetValue(cacheKey, out int requestCount))
+        {
+            if (requestCount >= 10)
+            {
+                _logger.LogWarning("Rate limit exceeded for IP: {Ip}", clientIp);
+                return StatusCode(429, new { ok = false, error = "Muitas tentativas. Tente novamente em alguns minutos." });
+            }
+        }
+        
+        // Incrementa contador
+        _cache.Set(cacheKey, (requestCount + 1), TimeSpan.FromMinutes(1));
+
         if (!ModelState.IsValid)
         {
             return ValidationProblem(ModelState);
@@ -56,7 +81,7 @@ public class PublicLeadsController : ControllerBase
 
             _logger.LogInformation(
                 "Lead criado: {Email} - {Name} via {Source} - Service: {Service}",
-                lead.Email,
+                MaskEmail(lead.Email),
                 lead.Nome,
                 lead.Origem,
                 lead.ServiceInterest
@@ -69,6 +94,21 @@ public class PublicLeadsController : ControllerBase
             _logger.LogError(ex, "Erro ao criar lead público");
             return StatusCode(500, new { ok = false, error = "Erro interno do servidor" });
         }
+    }
+
+    private static string MaskEmail(string email)
+    {
+        if (string.IsNullOrEmpty(email) || !email.Contains('@'))
+            return email;
+
+        var parts = email.Split('@');
+        var local = parts[0];
+        var domain = parts[1];
+
+        if (local.Length <= 2)
+            return $"{local}***@{domain}";
+
+        return $"{local.Substring(0, 2)}***@{domain}";
     }
 }
 
