@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Manager.Integrations.Cnpj;
+using Manager.Contracts.DTOs;
 
 namespace Manager.Api.Controllers;
 
