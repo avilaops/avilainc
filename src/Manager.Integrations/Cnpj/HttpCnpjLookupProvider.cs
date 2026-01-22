@@ -2,6 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Manager.Contracts.DTOs;
 
 namespace Manager.Integrations.Cnpj;
 
@@ -25,7 +26,7 @@ public class HttpCnpjLookupProvider : ICnpjLookupProvider
         _apiKey = configuration["CnpjLookup:ApiKey"];
     }
 
-    public async Task<CnpjLookupResult> LookupAsync(string cnpj)
+    public async Task<CnpjLookupResultDto> LookupAsync(string cnpj)
     {
         try
         {
@@ -33,18 +34,7 @@ public class HttpCnpjLookupProvider : ICnpjLookupProvider
             
             if (!IsValidCnpj(cleanCnpj))
             {
-                return new CnpjLookupResult(
-                    cleanCnpj,
-                    string.Empty,
-                    null,
-                    "INVALID",
-                    null,
-                    null,
-                    new List<string>(),
-                    null, null, null, null, null, null, null, null, null,
-                    false,
-                    "CNPJ inválido"
-                );
+                throw new ArgumentException("CNPJ inválido", nameof(cnpj));
             }
 
             var url = $"{_baseUrl}/{cleanCnpj}";
@@ -62,18 +52,7 @@ public class HttpCnpjLookupProvider : ICnpjLookupProvider
                 var error = await response.Content.ReadAsStringAsync();
                 _logger.LogWarning("Erro ao consultar CNPJ: {StatusCode} - {Error}", response.StatusCode, error);
                 
-                return new CnpjLookupResult(
-                    cleanCnpj,
-                    string.Empty,
-                    null,
-                    "ERROR",
-                    null,
-                    null,
-                    new List<string>(),
-                    null, null, null, null, null, null, null, null, null,
-                    false,
-                    $"Erro na consulta: {response.StatusCode}"
-                );
+                throw new HttpRequestException($"Erro na consulta: {response.StatusCode} - {error}");
             }
 
             var content = await response.Content.ReadAsStringAsync();
@@ -81,61 +60,40 @@ public class HttpCnpjLookupProvider : ICnpjLookupProvider
 
             if (data == null || data.Status == "ERROR")
             {
-                return new CnpjLookupResult(
-                    cleanCnpj,
-                    string.Empty,
-                    null,
-                    "ERROR",
-                    null,
-                    null,
-                    new List<string>(),
-                    null, null, null, null, null, null, null, null, null,
-                    false,
-                    data?.Message ?? "Erro desconhecido"
-                );
+                throw new InvalidOperationException(data?.Message ?? "Erro desconhecido");
             }
 
             var cnaeSecundarios = data.AtividadesSecundarias?
                 .Select(a => $"{a.Code} - {a.Text}")
                 .ToList() ?? new List<string>();
 
-            return new CnpjLookupResult(
-                cleanCnpj,
-                data.Nome ?? string.Empty,
-                data.Fantasia,
-                data.Situacao ?? "DESCONHECIDO",
-                ParseDate(data.Abertura),
-                data.AtividadePrincipal?.FirstOrDefault() != null 
+            return new CnpjLookupResultDto
+            {
+                Cnpj = cleanCnpj,
+                RazaoSocial = data.Nome ?? string.Empty,
+                NomeFantasia = data.Fantasia,
+                SituacaoCadastral = data.Situacao ?? "DESCONHECIDO",
+                DataAbertura = ParseDate(data.Abertura),
+                CnaePrincipal = data.AtividadePrincipal?.FirstOrDefault() != null 
                     ? $"{data.AtividadePrincipal[0].Code} - {data.AtividadePrincipal[0].Text}"
                     : null,
-                cnaeSecundarios,
-                data.Logradouro,
-                data.Numero,
-                data.Complemento,
-                data.Bairro,
-                data.Municipio,
-                data.Uf,
-                data.Cep,
-                data.Telefone,
-                data.Email,
-                true
-            );
+                CnaesSecundarios = cnaeSecundarios.Any() ? string.Join("; ", cnaeSecundarios) : null,
+                Logradouro = data.Logradouro,
+                Numero = data.Numero,
+                Complemento = data.Complemento,
+                Bairro = data.Bairro,
+                Municipio = data.Municipio,
+                Uf = data.Uf,
+                Cep = data.Cep,
+                Telefone = data.Telefone,
+                Email = data.Email,
+                RawJson = content
+            };
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Erro ao consultar CNPJ");
-            return new CnpjLookupResult(
-                cnpj,
-                string.Empty,
-                null,
-                "ERROR",
-                null,
-                null,
-                new List<string>(),
-                null, null, null, null, null, null, null, null, null,
-                false,
-                ex.Message
-            );
+            throw;
         }
     }
 

@@ -37,10 +37,10 @@ public class CnpjController : ControllerBase
             
             // Verifica cache (10 minutos)
             var cacheKey = $"cnpj_{cleanCnpj}";
-            if (_cache.TryGetValue<CnpjLookupResult>(cacheKey, out var cached))
+            if (_cache.TryGetValue<CnpjLookupResultDto>(cacheKey, out var cached))
             {
                 _logger.LogInformation("CNPJ {Cnpj} retornado do cache", MaskCnpj(cleanCnpj));
-                return Ok(new { success = true, cached = true, data = MapToDto(cached!) });
+                return Ok(new { success = true, cached = true, data = cached });
             }
 
             // Rate limit: 1 req/seg
@@ -48,20 +48,22 @@ public class CnpjController : ControllerBase
             try
             {
                 var result = await _cnpjProvider.LookupAsync(cleanCnpj);
+                
+                // Cache por 10 minutos
+                _cache.Set(cacheKey, result, TimeSpan.FromMinutes(10));
 
-                if (result.Success)
-                {
-                    // Cache por 10 minutos
-                    _cache.Set(cacheKey, result, TimeSpan.FromMinutes(10));
-                }
-
-                return Ok(new { success = result.Success, cached = false, data = MapToDto(result) });
+                return Ok(new { success = true, cached = false, data = result });
             }
             finally
             {
                 await Task.Delay(1000); // Rate limit: 1/seg
                 _rateLimiter.Release();
             }
+        }
+        catch (ArgumentException ex)
+        {
+            _logger.LogWarning(ex, "CNPJ inválido: {Cnpj}", cnpj);
+            return BadRequest(new { success = false, message = ex.Message });
         }
         catch (Exception ex)
         {
@@ -82,42 +84,5 @@ public class CnpjController : ControllerBase
             return $"{cnpj.Substring(0, 2)}.{cnpj.Substring(2, 3)}.{cnpj.Substring(5, 3)}/{cnpj.Substring(8, 4)}-{cnpj.Substring(12, 2)}";
         }
         return cnpj;
-    }
-
-    private static Manager.Contracts.DTOs.CnpjLookupResult MapToDto(CnpjLookupResult r) => new(
-        r.Cnpj,
-        r.RazaoSocial,
-        r.NomeFantasia,
-        r.Status,
-        r.DataAbertura,
-        r.CnaeMain,
-        r.CnaeSecondary,
-        r.Logradouro,
-        r.Numero,
-        r.Complemento,
-        r.Bairro,
-        r.Municipio,
-        r.Uf,
-        r.Cep,
-        r.Telefone,
-        r.Email,
-        r.Success,
-        r.ErrorMessage
-    );
-}
-
-            var result = await _cnpjLookupService.LookupAsync(normalizedCnpj);
-            return Ok(result);
-        }
-        catch (ArgumentException ex)
-        {
-            _logger.LogWarning(ex, "Invalid CNPJ format: {Cnpj}", cnpj);
-            return BadRequest(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error looking up CNPJ: {Cnpj}", cnpj);
-            return StatusCode(500, "Erro interno do servidor");
-        }
     }
 }
